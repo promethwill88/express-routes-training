@@ -3,11 +3,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-// MIDDLEWARE
-// serve assets from the public folder...
-// ... as if they were inside the / directory
-app.use(express.static('public'));
-
 // DATA (temporary until we know how to use databases)
 
 
@@ -45,23 +40,22 @@ app.post('/picknumber', function(req, res){
 
 let artworks = [];
 
-app.get('/artworks', function(request, response){
-  response.json(artworks);
+app.get('/artworks', function(req, res){
+  res.json(artworks);
 });
 
-app.post('/artworks', function(request, response){
+app.post('/artworks', function(req, res){
   let newArtwork = {
-    name: request.body.title,
-    description: request.body.description,
-    artist: request.body.artist
+    name: req.body.title,
+    description: req.body.description,
+    artist: req.body.artist
   };
   artworks.push(newArtwork);
-  response.json(artworks);
+  res.json(artworks);
 });
-
 
 
 // SERVER START
-app.listen(3000, function () {
-  console.log("HTTP server listening at localhost:3000");
+app.listen(2000, function () {
+  console.log("HTTP server listening at localhost:2000");
 });
